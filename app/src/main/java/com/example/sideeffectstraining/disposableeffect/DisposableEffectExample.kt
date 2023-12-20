@@ -24,10 +24,8 @@ fun MyDisposableEffect(name: String, modifier: Modifier = Modifier) {
     var state by remember { mutableStateOf(true) }
     val context = LocalContext.current
 
-    // LaunchedEffect is a composable function that is used to launch a coroutine inside the scope of composable,
-    // when LaunchedEffect enters the composition, it launches a coroutine and cancels when it leaves composition.
-    // LaunchedEffect takes multiple keys as params and if any of the key changes it cancels the existing coroutine and launch again.
-    // This is useful for performing side effects, such as making network calls or updating a database, without blocking the UI thread.
+    // The DisposableEffect composable is utilized to execute an effect when a Composable function is initially created.
+    // It then clears the effect when the Composable is removed from the screen.
     LaunchedEffect(key1 = Unit){
         Toast.makeText(context,"Show Toast", Toast.LENGTH_SHORT).show()
     }
