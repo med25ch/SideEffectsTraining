@@ -1,4 +1,4 @@
-package com.example.sideeffectstraining.launchedeffect
+package com.example.sideeffectstraining.disposableeffect
 
 import android.widget.Toast
 import androidx.compose.foundation.clickable
@@ -19,7 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.sideeffectstraining.ui.theme.SideEffectsTrainingTheme
 
 @Composable
-fun MyComposable(name: String, modifier: Modifier = Modifier) {
+fun MyDisposableEffect(name: String, modifier: Modifier = Modifier) {
 
     var state by remember { mutableStateOf(true) }
     val context = LocalContext.current
@@ -29,13 +29,13 @@ fun MyComposable(name: String, modifier: Modifier = Modifier) {
     // LaunchedEffect takes multiple keys as params and if any of the key changes it cancels the existing coroutine and launch again.
     // This is useful for performing side effects, such as making network calls or updating a database, without blocking the UI thread.
     LaunchedEffect(key1 = Unit){
-        Toast.makeText(context,"Show Toast",Toast.LENGTH_SHORT).show()
+        Toast.makeText(context,"Show Toast", Toast.LENGTH_SHORT).show()
     }
 
     DisposableEffect(key1 = state){
 
         onDispose {
-            Toast.makeText(context,"onDispose called",Toast.LENGTH_SHORT).show()
+            Toast.makeText(context,"onDispose called", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -52,8 +52,8 @@ fun MyComposable(name: String, modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun MyComposablePreview() {
+fun MyDisposableEffectPreview() {
     SideEffectsTrainingTheme {
-        MyComposable("Android")
+        MyDisposableEffect("Android")
     }
 }
