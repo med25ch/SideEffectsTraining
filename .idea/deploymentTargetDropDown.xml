@@ -5,6 +5,9 @@
       <entry key="MyComposablePreview">
         <State />
       </entry>
+      <entry key="PreviewRememberCoroutineScope">
+        <State />
+      </entry>
       <entry key="RememberCoroutineScopePreview">
         <State />
       </entry>
