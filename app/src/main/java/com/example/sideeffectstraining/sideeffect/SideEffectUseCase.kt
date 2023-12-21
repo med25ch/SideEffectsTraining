@@ -1,4 +1,4 @@
-package com.example.sideeffectstraining.launchedeffect
+package com.example.sideeffectstraining.sideeffect
 
 import android.widget.Toast
 import androidx.compose.foundation.clickable
@@ -8,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -24,12 +25,11 @@ fun MyComposable(name: String, modifier: Modifier = Modifier) {
     var state by remember { mutableStateOf(true) }
     val context = LocalContext.current
 
-    // LaunchedEffect is a composable function that is used to launch a coroutine inside the scope of composable,
-    // when LaunchedEffect enters the composition, it launches a coroutine and cancels when it leaves composition.
-    // LaunchedEffect takes multiple keys as params and if any of the key changes it cancels the existing coroutine and launch again.
-    // This is useful for performing side effects, such as making network calls or updating a database, without blocking the UI thread.
-    LaunchedEffect(key1 = Unit){
-        Toast.makeText(context,"Show Toast",Toast.LENGTH_SHORT).show()
+    //SideEffect is used to publish compose state to non-compose code.
+    // The SideEffect is triggered on every recomposition and it is not a coroutine scope,
+    // so suspend functions cannot be used within it.
+    SideEffect(){
+        Toast.makeText(context,"Show Toast With SideEffect", Toast.LENGTH_SHORT).show()
     }
 
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
